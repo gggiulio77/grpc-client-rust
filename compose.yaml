@@ -8,21 +8,25 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  grpc-client-rust:
-    environment:
-      - RUST_LOG=info
-      - RUST_BACKTRACE=1
-      - SERVER_URL=http://grpc-server-rust:4000
-    build:
-      context: .
-      target: final
-    networks:
-      - grpc-rust-client
+    grpc-client-rust:
+        environment:
+            - RUST_LOG=info
+            - RUST_BACKTRACE=1
+            - SERVER_URL=http://grpc-server-nestjs:4000
+        build:
+            context: .
+            target: final
+        networks:
+            - grpc-rust-client
+            - grpc-nestjs-client
 
 networks:
-  grpc-rust-client:
-    name: grpc_rust_test
-    external: true
+    grpc-rust-client:
+        name: grpc_rust_test
+        external: true
+    grpc-nestjs-client:
+        name: grpc_nestjs_test
+        external: true
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
